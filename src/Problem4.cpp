@@ -36,10 +36,38 @@ struct node{
 	struct node *right;
 };
 
-void travers_bst2(struct node root1, struct node root2);
+struct node* combine(struct node *root1, struct node *insert)
+{
+	struct node *p = root1, *q = NULL;
+	while (p)
+	{
+		q = p;
+		if (p->data > insert->data)
+			p = p->left;
+		else p = p->right;
+	}
+	if (q->data > insert->data)
+		q->left = insert;
+	else q->right = insert;
+	return root1;
+}
+void travers_bst2(struct node *root1, struct node *root2)
+{
+	if (root2->left)
+	{
+		travers_bst2(root1, root2->left);
+		root2->left = NULL;
+	}
+	if (root2->right)
+	{
+		travers_bst2(root1, root2->right);
+		root2->right = NULL;
+	}
+	root1 = combine(root1, root2);
+}
 void merge_two_bst(struct node *root1, struct node *root2){
-	
-	//if (root1 == NULL || root2 == NULL) return;
-	//travers_bst2(root1, root2);
+
+	if (root1 == NULL || root2 == NULL) return;
+	travers_bst2(root1, root2);
 
 }
