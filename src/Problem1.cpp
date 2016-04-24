@@ -50,7 +50,27 @@ struct node{
 	struct node *right;
 };
 
-
+void travers(struct node *root, int *given_input_sum)
+{
+	if (root->left)
+		travers(root->left, given_input_sum);
+	*given_input_sum = *given_input_sum + root->data;
+	if (root->right)
+		travers(root->right, given_input_sum);
+}
 int get_missing_value(struct node *root,int n){
-    return -1;
+
+	if (root == NULL || n == 0)
+		return -1;
+	int sum_of_nodes, given_input_sum = 0, flag = 0;
+	if (n < 0)
+	{
+		flag = 1;
+		n = n * (-1);
+	}
+	sum_of_nodes = n * (n + 1) / 2;
+	travers(root,&given_input_sum);
+	if (flag == 1) sum_of_nodes = sum_of_nodes * -1;
+	return sum_of_nodes - given_input_sum;
+ 
 }
