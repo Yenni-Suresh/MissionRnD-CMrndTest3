@@ -36,8 +36,10 @@ struct node{
 	struct node *right;
 };
 
+void travers_bst2(struct node root1, struct node root2);
 void merge_two_bst(struct node *root1, struct node *root2){
 	
-	if (root1 == NULL || root2 == NULL) return;
+	//if (root1 == NULL || root2 == NULL) return;
+	//travers_bst2(root1, root2);
 
 }
